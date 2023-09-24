@@ -220,12 +220,12 @@
 // For ESP32 Dev board (only tested with GC9A01 display)
 // The hardware SPI can be mapped to any pins
 
-#define TFT_MOSI 18 // In some display driver board, it might be written as "SDA" and so on.
-#define TFT_SCLK 19
-#define TFT_CS   16  // Chip select control pin
-#define TFT_DC   17  // Data Command control pin
-#define TFT_RST  5   // Reset pin (could connect to Arduino RESET pin)
-#define TFT_BL   4  // LED back-light
+#define TFT_MOSI 18  // SDA
+#define TFT_SCLK 19  // SCL
+#define TFT_CS   16  // CS  - Chip select control pin
+#define TFT_DC   17  // DC  - Data Command control pin
+#define TFT_RST  5   // RES - Reset pin (could connect to Arduino RESET pin)
+#define TFT_BL   4   // BLK - LED back-light
 
 //#define TOUCH_CS 21     // Chip select pin (T_CS) of touch screen
 
