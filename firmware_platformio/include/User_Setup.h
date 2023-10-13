@@ -73,7 +73,7 @@
 // For ST7735, ST7789 and ILI9341 ONLY, define the colour order IF the blue and red are swapped on your display
 // Try ONE option at a time to find the correct colour order for your display
 
-//  #define TFT_RGB_ORDER TFT_RGB  // Colour order Red-Green-Blue
+#define TFT_RGB_ORDER TFT_RGB  // Colour order Red-Green-Blue
 //  #define TFT_RGB_ORDER TFT_BGR  // Colour order Blue-Green-Red
 
 // For M5Stack ESP32 module with integrated ILI9341 display ONLY, remove // in line below
@@ -220,12 +220,12 @@
 // For ESP32 Dev board (only tested with GC9A01 display)
 // The hardware SPI can be mapped to any pins
 
-#define TFT_MOSI 18  // SDA
-#define TFT_SCLK 19  // SCL
-#define TFT_CS   16  // CS  - Chip select control pin
-#define TFT_DC   17  // DC  - Data Command control pin
-#define TFT_RST  5   // RES - Reset pin (could connect to Arduino RESET pin)
-#define TFT_BL   4   // BLK - LED back-light
+#define TFT_MOSI 23  // SDA
+#define TFT_SCLK 18  // SCL
+#define TFT_CS   5   // CS  - Chip select control pin
+#define TFT_DC   21  // DC  - Data Command control pin
+#define TFT_RST  22  // RES - Reset pin (could connect to Arduino RESET pin)
+#define TFT_BL   17  // BLK - LED back-light
 
 //#define TOUCH_CS 21     // Chip select pin (T_CS) of touch screen
 
@@ -374,7 +374,7 @@
 // The ESP32 has 2 free SPI ports i.e. VSPI and HSPI, the VSPI is the default.
 // If the VSPI port is in use and pins are not accessible (e.g. TTGO T-Beam)
 // then uncomment the following line:
-#define USE_HSPI_PORT
+// #define USE_HSPI_PORT
 
 // Comment out the following #define if "SPI Transactions" do not need to be
 // supported. When commented out the code size will be smaller and sketches will
