@@ -84,12 +84,12 @@ int generate_random_data(void) {
     return new_value;
 }
 
-lv_chart_series_t * ser = lv_chart_add_series(ui_dbaChart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
+lv_chart_series_t * ser = lv_chart_add_series(ui_dbaChart, LV_COLOR_RED);
 void loop()
 {
-    int new_value = generate_random_data(); // get_new_chart_value() should return the latest data point for the chart
+    lv_coord_t new_value = generate_random_data(); // get_new_chart_value() should return the latest data point for the chart
     lv_chart_set_next_value(ui_dbaChart, ser, new_value);
-    lv_label_set_text_fmt(ui_dbaValue, "%d", new_value);
+    // lv_label_set_text_fmt(ui_dbaValue, "%d", new_value);
     
     lv_timer_handler();
     delay(100);
