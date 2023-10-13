@@ -56,8 +56,41 @@ void setup()
     Serial.println( "Setup done" );
 }
 
+
+
+#define MIN_VALUE 20
+#define MAX_VALUE 100
+
+int previous_value = 50; // Starting value
+
+int generate_random_data(void) {
+    srand(time(NULL));
+
+    // Generate a random offset between -5 and 5
+    int offset = (rand() % 11) - 2; 
+    
+    // Add the offset to the previous value to get continuity
+    int new_value = previous_value + offset;
+    
+    // Make sure the new value is within the specified range
+    if (new_value < MIN_VALUE) {
+        new_value = MIN_VALUE;
+    } else if (new_value > MAX_VALUE) {
+        new_value = MAX_VALUE;
+    }
+    
+    previous_value = new_value;
+    
+    return new_value;
+}
+
+lv_chart_series_t * ser = lv_chart_add_series(ui_dbaChart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
 void loop()
 {
+    int new_value = generate_random_data(); // get_new_chart_value() should return the latest data point for the chart
+    lv_chart_set_next_value(ui_dbaChart, ser, new_value);
+    lv_label_set_text_fmt(ui_dbaValue, "%d", new_value);
+    
     lv_timer_handler();
-    delay(5);
+    delay(100);
 }
