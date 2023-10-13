@@ -261,7 +261,6 @@
               },
               {
                 "nid": -1482798957,
-                "flags": 1048576,
                 "strtype": "CHART/Chart",
                 "InheritedType": 1
               },
@@ -274,15 +273,15 @@
               {
                 "nid": 978659953,
                 "strtype": "CHART/Number_of_points",
-                "integer": 10,
+                "integer": 50,
                 "InheritedType": 6
               },
               {
                 "nid": 1895430336,
                 "strtype": "CHART/Division_lines",
                 "intarray": [
-                  3,
-                  5
+                  9,
+                  7
                 ],
                 "InheritedType": 7
               },
@@ -332,6 +331,7 @@
               },
               {
                 "nid": -1351370245,
+                "flags": 1048576,
                 "strtype": "CHART/Primary_Y_Axis",
                 "InheritedType": 1
               },
@@ -376,6 +376,7 @@
               },
               {
                 "nid": -367255918,
+                "flags": 1048576,
                 "strtype": "CHART/Secondary_Y_Axis",
                 "InheritedType": 1
               },

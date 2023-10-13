@@ -59,39 +59,35 @@ void setup()
 }
 
 
-
-#define MIN_VALUE 20
-#define MAX_VALUE 100
-
-int previous_value = 50; // Starting value
-
-int generate_random_data(void) {
-    srand(time(NULL));
-
-    // Generate a random offset between -5 and 5
-    int offset = (rand() % 11) - 2; 
+// Function to generate a complex harmonic signal
+int generate_complex_signal(void) {
+    static double angle = 0;
     
-    // Add the offset to the previous value to get continuity
-    int new_value = previous_value + offset;
-    
-    // Make sure the new value is within the specified range
-    if (new_value < MIN_VALUE) {
-        new_value = MIN_VALUE;
-    } else if (new_value > MAX_VALUE) {
-        new_value = MAX_VALUE;
+    // Increment the angle
+    angle += 0.1;
+    if (angle > 2 * PI) {
+        angle -= 2 * PI;
     }
+
+    // Generate a complex signal by summing multiple sine and cosine functions
+    double signal = sin(angle) +
+                    0.5 * sin(2 * angle) +
+                    0.3 * cos(3 * angle) +
+                    0.1 * cos(4 * angle);
     
-    previous_value = new_value;
+    // Normalize and scale the signal to be within 20 to 80
+    signal = signal / 2.0; // Normalize to -0.5 to 0.5
+    signal = signal + 0.5; // Shift to 0 to 1
+    signal = signal * 60;  // Scale to 0 to 60
+    signal = signal + 40;  // Shift to 20 to 100
     
-    return new_value;
+    return (int) signal;
 }
 
-void loop()
-{
-    int new_value = generate_random_data();
+void loop() {
+    int new_value = generate_complex_signal();
     lv_chart_set_next_value(ui_dbaChart, ser, new_value);
     lv_label_set_text_fmt(ui_dbaValue, "%d", new_value);
     
     lv_timer_handler();
-    delay(100);
 }
