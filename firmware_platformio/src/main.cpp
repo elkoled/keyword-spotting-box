@@ -21,6 +21,7 @@ void my_disp_flush( lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *
     lv_disp_flush_ready( disp_drv );
 }
 
+lv_chart_series_t * ser;
 void setup()
 {
     Serial.begin( 115200 ); /* prepare for possible serial debug */
@@ -52,6 +53,7 @@ void setup()
     lv_disp_drv_register( &disp_drv );
   
     ui_init();
+    ser = lv_chart_add_series(ui_dbaChart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
 
     Serial.println( "Setup done" );
 }
@@ -84,12 +86,11 @@ int generate_random_data(void) {
     return new_value;
 }
 
-lv_chart_series_t * ser = lv_chart_add_series(ui_dbaChart, LV_COLOR_RED);
 void loop()
 {
-    lv_coord_t new_value = generate_random_data(); // get_new_chart_value() should return the latest data point for the chart
+    int new_value = generate_random_data();
     lv_chart_set_next_value(ui_dbaChart, ser, new_value);
-    // lv_label_set_text_fmt(ui_dbaValue, "%d", new_value);
+    lv_label_set_text_fmt(ui_dbaValue, "%d", new_value);
     
     lv_timer_handler();
     delay(100);
