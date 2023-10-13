@@ -15,7 +15,7 @@
               {
                 "nid": 1896148352,
                 "strtype": "OBJECT/Name",
-                "strval": "Chart1",
+                "strval": "dbaChart",
                 "InheritedType": 10
               },
               {
@@ -1067,7 +1067,7 @@
               {
                 "nid": -56643377,
                 "strtype": "OBJECT/Name",
-                "strval": "Label5",
+                "strval": "dbaValue",
                 "InheritedType": 10
               },
               {
@@ -1619,7 +1619,7 @@
     "theme_color2": 0,
     "exportFolderPath": "C:\\Users\\Daniel\\Documents\\PlatformIO\\Projects\\keyword-spotting-box\\firmware_platformio\\lib\\LVGL_UI",
     "projectExportFolderPath": "C:\\Users\\Daniel\\Documents\\PlatformIO\\Projects\\keyword-spotting-box\\firmware_platformio\\lib\\LVGL_UI_Project",
-    "backup_cnt": 16,
+    "backup_cnt": 17,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",
