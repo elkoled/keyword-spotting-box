@@ -103,7 +103,7 @@ void setup_display()
 // Configuration
 //
 
-#define LEQ_PERIOD        0.1           // second(s)
+#define LEQ_PERIOD        5           // second(s)
 #define WEIGHTING         C_weighting // Also avaliable: 'C_weighting' or 'None' (Z_weighting)
 #define LEQ_UNITS         "LAeq"      // customize based on above weighting used
 #define DB_UNITS          "dBA"       // customize based on above weighting used
@@ -439,9 +439,11 @@ void setup() {
   xTaskCreate(mic_i2s_reader_task, "Mic I2S Reader", I2S_TASK_STACK, NULL, I2S_TASK_PRI, NULL);
 
   sum_queue_t q;
-  uint32_t Leq_samples = 0;
-  double Leq_sum_sqr = 0;
-  double Leq_dB = 0;
+  uint32_t Leq_samples_1, Leq_samples_2 = 0;
+  double Leq_sum_sqr_1, Leq_sum_sqr_2 = 0;
+  double Leq_dB_1, Leq_dB_2 = 0;
+  double max_db = 0;
+  bool startup = true;
 
   // Read sum of samaples, calculated by 'i2s_reader_task'
   while (xQueueReceive(samples_queue, &q, portMAX_DELAY)) {
@@ -458,27 +460,56 @@ void setup() {
     // }
 
     // Accumulate Leq sum
-    Leq_sum_sqr += q.sum_sqr_weighted;
-    Leq_samples += SAMPLES_SHORT;
+    Leq_sum_sqr_1 += q.sum_sqr_weighted;
+    Leq_samples_1 += SAMPLES_SHORT;
+
+    Leq_sum_sqr_2 += q.sum_sqr_weighted;
+    Leq_samples_2 += SAMPLES_SHORT;
 
     // When we gather enough samples, calculate new Leq value
-    if (Leq_samples >= SAMPLE_RATE * LEQ_PERIOD) {
-      double Leq_RMS = sqrt(Leq_sum_sqr / Leq_samples);
-      Leq_dB = MIC_OFFSET_DB + MIC_REF_DB + 20 * log10(Leq_RMS / MIC_REF_AMPL);
-      Leq_sum_sqr = 0;
-      Leq_samples = 0;
+    if (Leq_samples_1 >= SAMPLES_SHORT ) {
+      double Leq_RMS_1 = sqrt(Leq_sum_sqr_1 / Leq_samples_1);
+      Leq_dB_1 = MIC_OFFSET_DB + MIC_REF_DB + 20 * log10(Leq_RMS_1 / MIC_REF_AMPL);
+      Leq_sum_sqr_1 = 0;
+      Leq_samples_1 = 0;
       
       // Serial output, customize (or remove) as needed
-      Serial.printf("%.1f\n", Leq_dB);
+    //   Serial.printf("%.1f\n", Leq_dB);
 
-      lv_chart_set_next_value(ui_dbaChart, ser, Leq_dB);
-      lv_label_set_text_fmt(ui_dbaValue, "%d", (int)Leq_dB);
+      lv_chart_set_next_value(ui_dbaChart, ser, Leq_dB_1);
+      lv_label_set_text_fmt(ui_curr, "%d", (int)Leq_dB_1);
+      if(Leq_dB_1 > max_db && !startup) 
+      {
+        max_db = Leq_dB_1;
+        lv_label_set_text_fmt(ui_max, "%d", (int)max_db);
+      }
     
       lv_timer_handler();
 
       // Debug only
       //Serial.printf("%u processing ticks\n", q.proc_ticks);
     }
+
+    // When we gather enough samples, calculate new Leq value
+    if (Leq_samples_2 >= SAMPLE_RATE * LEQ_PERIOD) {
+      double Leq_RMS_2 = sqrt(Leq_sum_sqr_2 / Leq_samples_2);
+      Leq_dB_2 = MIC_OFFSET_DB + MIC_REF_DB + 20 * log10(Leq_RMS_2 / MIC_REF_AMPL);
+      Leq_sum_sqr_2 = 0;
+      Leq_samples_2 = 0;
+      
+      // Serial output, customize (or remove) as needed
+    //   Serial.printf("%.1f\n", Leq_dB);
+
+      lv_chart_set_next_value(ui_dbaChart, ser, Leq_dB_2);
+      lv_label_set_text_fmt(ui_avg, "%d", (int)Leq_dB_2);
+      startup = false;
+    
+      lv_timer_handler();
+
+      // Debug only
+      //Serial.printf("%u processing ticks\n", q.proc_ticks);
+    }
+
 
     #if (USE_DISPLAY > 0)
 

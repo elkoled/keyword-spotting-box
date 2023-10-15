@@ -513,7 +513,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   98,
-                  -99
+                  -97
                 ],
                 "InheritedType": 7
               },
@@ -1686,7 +1686,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  57,
+                  55,
                   -124
                 ],
                 "InheritedType": 7
@@ -1988,7 +1988,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -50,
-                  -101
+                  -100
                 ],
                 "InheritedType": 7
               },
@@ -2214,7 +2214,7 @@
               {
                 "nid": 2140621675,
                 "strtype": "LABEL/Text",
-                "strval": "100",
+                "strval": "0",
                 "InheritedType": 10
               },
               {
@@ -2239,7 +2239,7 @@
                       {
                         "nid": -1934746791,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_20",
+                        "strval": "montserrat_26",
                         "InheritedType": 3
                       }
                     ],
@@ -2300,7 +2300,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   2,
-                  -101
+                  -100
                 ],
                 "InheritedType": 7
               },
@@ -2526,7 +2526,7 @@
               {
                 "nid": 693814582,
                 "strtype": "LABEL/Text",
-                "strval": "100",
+                "strval": "0",
                 "InheritedType": 10
               },
               {
@@ -2551,7 +2551,7 @@
                       {
                         "nid": 714287329,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_20",
+                        "strval": "montserrat_26",
                         "InheritedType": 3
                       }
                     ],
@@ -2612,7 +2612,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   55,
-                  -101
+                  -100
                 ],
                 "InheritedType": 7
               },
@@ -2838,7 +2838,7 @@
               {
                 "nid": 1992827974,
                 "strtype": "LABEL/Text",
-                "strval": "100",
+                "strval": "0",
                 "InheritedType": 10
               },
               {
@@ -2863,7 +2863,7 @@
                       {
                         "nid": 1447923842,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_20",
+                        "strval": "montserrat_26",
                         "InheritedType": 3
                       }
                     ],
