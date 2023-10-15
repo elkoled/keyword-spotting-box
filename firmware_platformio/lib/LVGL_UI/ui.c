@@ -15,7 +15,12 @@ lv_obj_t *ui_Home;
 lv_obj_t *ui_dbaChart;
 lv_obj_t *ui_Label1;
 lv_obj_t *ui_Label2;
-lv_obj_t *ui_dbaValue;
+lv_obj_t *ui_Label4;
+lv_obj_t *ui_Label5;
+lv_obj_t *ui_Label6;
+lv_obj_t *ui_max;
+lv_obj_t *ui_avg;
+lv_obj_t *ui_curr;
 lv_obj_t *ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////

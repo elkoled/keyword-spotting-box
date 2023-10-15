@@ -30,7 +30,12 @@ extern lv_obj_t *ui_Home;
 extern lv_obj_t *ui_dbaChart;
 extern lv_obj_t *ui_Label1;
 extern lv_obj_t *ui_Label2;
-extern lv_obj_t *ui_dbaValue;
+extern lv_obj_t *ui_Label4;
+extern lv_obj_t *ui_Label5;
+extern lv_obj_t *ui_Label6;
+extern lv_obj_t *ui_max;
+extern lv_obj_t *ui_avg;
+extern lv_obj_t *ui_curr;
 extern lv_obj_t *ui____initial_actions0;
 
 
