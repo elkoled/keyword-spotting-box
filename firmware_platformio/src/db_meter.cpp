@@ -460,35 +460,25 @@ void setup() {
     // }
 
     // Accumulate Leq sum
-    Leq_sum_sqr_1 += q.sum_sqr_weighted;
-    Leq_samples_1 += SAMPLES_SHORT;
+    Leq_sum_sqr_1 = q.sum_sqr_weighted;
+    Leq_samples_1 = SAMPLES_SHORT;
 
     Leq_sum_sqr_2 += q.sum_sqr_weighted;
     Leq_samples_2 += SAMPLES_SHORT;
 
-    // When we gather enough samples, calculate new Leq value
-    if (Leq_samples_1 >= SAMPLES_SHORT ) {
-      double Leq_RMS_1 = sqrt(Leq_sum_sqr_1 / Leq_samples_1);
-      Leq_dB_1 = MIC_OFFSET_DB + MIC_REF_DB + 20 * log10(Leq_RMS_1 / MIC_REF_AMPL);
-      Leq_sum_sqr_1 = 0;
-      Leq_samples_1 = 0;
+    double Leq_RMS_1 = sqrt(Leq_sum_sqr_1 / Leq_samples_1);
+    Leq_dB_1 = MIC_OFFSET_DB + MIC_REF_DB + 20 * log10(Leq_RMS_1 / MIC_REF_AMPL);
       
-      // Serial output, customize (or remove) as needed
-    //   Serial.printf("%.1f\n", Leq_dB);
 
-      lv_chart_set_next_value(ui_dbaChart, ser, Leq_dB_1);
-      lv_label_set_text_fmt(ui_curr, "%d", (int)Leq_dB_1);
-      if(Leq_dB_1 > max_db && !startup) 
-      {
-        max_db = Leq_dB_1;
-        lv_label_set_text_fmt(ui_max, "%d", (int)max_db);
-      }
-    
-      lv_timer_handler();
-
-      // Debug only
-      //Serial.printf("%u processing ticks\n", q.proc_ticks);
+    lv_chart_set_next_value(ui_dbaChart, ser, Leq_dB_1);
+    lv_label_set_text_fmt(ui_curr, "%d", (int)Leq_dB_1);
+    if(Leq_dB_1 > max_db && !startup) 
+    {
+      max_db = Leq_dB_1;
+      lv_label_set_text_fmt(ui_max, "%d", (int)max_db);
     }
+  
+
 
     // When we gather enough samples, calculate new Leq value
     if (Leq_samples_2 >= SAMPLE_RATE * LEQ_PERIOD) {
@@ -503,12 +493,12 @@ void setup() {
       lv_chart_set_next_value(ui_dbaChart, ser, Leq_dB_2);
       lv_label_set_text_fmt(ui_avg, "%d", (int)Leq_dB_2);
       startup = false;
-    
-      lv_timer_handler();
 
       // Debug only
       //Serial.printf("%u processing ticks\n", q.proc_ticks);
     }
+    
+    lv_timer_handler();
 
 
     #if (USE_DISPLAY > 0)
